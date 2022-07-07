@@ -62,7 +62,7 @@ const Users = () => {
 
     const counterFriends = () => {
 
-        const declination = (count % 100 >= 2 && count % 100 <=4) ? 'человека тусанут' : 'человек тусанет'
+        const declination = (count % 10 >= 2 && count % 10 <=4) ? 'человека тусанут' : 'человек тусанет'
 
         return (
             count !== 0 ? <span> {count} {declination} с тобой сегодня</span> : <span>Никто с тобой не тусанет</span>
