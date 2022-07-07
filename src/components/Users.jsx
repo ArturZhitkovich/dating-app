@@ -31,7 +31,14 @@ const Users = () => {
                     <td>{user.name}</td>
                     <td>
                         <ul className="d-flex justify-content-between">
-                            {user.qualities.map((quality) => (<li key={quality._id.toString()} className={`fw-bold text-white rounded-1 py-1 px-2 bg-` + quality.color} >{quality.name}</li>))}
+                            {user.qualities
+                                .map((quality) => (
+                                    <li key={quality._id}
+                                        className={`fw-bold text-white rounded-1 py-1 px-2 bg-` + quality.color} >
+                                        {quality.name}
+                                    </li>
+                                ))
+                            }
                         </ul>
                     </td>
                     <td>{user.profession.name}</td>
@@ -54,8 +61,11 @@ const Users = () => {
 
 
     const counterFriends = () => {
+
+        const declination = (count % 100 >= 2 && count % 100 <=4) ? 'человека тусанут' : 'человек тусанет'
+
         return (
-            count !== 0 ? <span> {count} человек тусанет с тобой сегодня</span> : <span>Никто с тобой не тусанет</span>
+            count !== 0 ? <span> {count} {declination} с тобой сегодня</span> : <span>Никто с тобой не тусанет</span>
         )
     }
 
