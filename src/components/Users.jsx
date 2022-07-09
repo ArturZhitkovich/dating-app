@@ -8,29 +8,36 @@ import counterFriends from "../utils/counterFriends";
 // создаем компонент Users
 const Users = () => {
     const [users, setUsers] = useState(api.users.fetchAll());
-    const [count, setCount] = useState(users.length)
+    const isHasUsers = users.length !==0;
 
+    // удаляем user
     const handleDelete = (userId) => {
-        setUsers(prevState => prevState.filter((user) => user._id !== userId));
-
-        setCount(count -1)
+        setUsers(users => users.filter((user) => user._id !== userId));
     }
 
+    // получаем качества user
+    const userQualities = (user) => {
+        return (
+            <ul className="d-flex gap-3">
+                {
+                    user.qualities.map((quality) => (
+                        <li key={quality._id}
+                            className={`fw-bold text-white rounded-1 py-1 px-2 bg-` + quality.color}>
+                            {quality.name}
+                        </li>
+                    ))
+                }
+            </ul>
+        )
+    }
+
+    // рендерим строку user
     const renderRows = () => {
         return users.map((user) => (
             <tr key={user._id}>
                 <td>{user.name}</td>
                 <td>
-                    <ul className="d-flex gap-3">
-                        {
-                            user.qualities.map((quality) => (
-                                <li key={quality._id}
-                                    className={`fw-bold text-white rounded-1 py-1 px-2 bg-` + quality.color} >
-                                    {quality.name}
-                                </li>
-                            ))
-                        }
-                    </ul>
+                    {userQualities(user)}
                 </td>
                 <td>{user.profession.name}</td>
                 <td>{user.completedMeetings}</td>
@@ -49,8 +56,8 @@ const Users = () => {
 
     return (
         <>
-            <span className={getBadgeClasses(users.length)}>{counterFriends(count)}</span>
-            {count ?
+            <span className={getBadgeClasses(isHasUsers)}>{counterFriends(users.length)}</span>
+            {isHasUsers &&
                 <table className="table">
                     <thead>
                         <tr>
@@ -65,7 +72,8 @@ const Users = () => {
                     <tbody>
                         {renderRows()}
                     </tbody>
-                </table> : false}
+                </table>
+            }
         </>
     )
 }

@@ -3,7 +3,4 @@ const getBadgeClasses = (isHasUsers) => {
     return isHasUsers ? classes + "bg-primary" : classes + "bg-danger"
 }
 
-
-
-
 export default getBadgeClasses;
