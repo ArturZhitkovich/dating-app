@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Quality = ({color, name, _id}) => {
+const Quality = ({color, name, _id}) => { // id 
     return (
             <span
                 className={"badge m-1 bg-" + color}
