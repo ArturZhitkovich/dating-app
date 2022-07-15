@@ -9,7 +9,7 @@ const User = ({user, onDelete, onToggleBookMark}) => {
             <td>
                 {user.qualities.map(quality => (
                     <Quality
-                        _id={quality._id}
+                        _id={quality._id} // id
                         name={quality.name}
                         color={quality.color}
                         key={quality._id}/>
